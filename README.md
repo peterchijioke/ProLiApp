@@ -37,5 +37,5 @@ This project is a React Native-based Product Listing Application. The app intera
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/product-listing-app.git
+   git clone https://github.com/peterchijioke/ProLiApp.git
    cd product-listing-app
