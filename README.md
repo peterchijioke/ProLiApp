@@ -39,7 +39,6 @@ This project is a React Native-based Product Listing Application. The app intera
    ```bash
    git clone https://github.com/peterchijioke/ProLiApp.git
    cd PrLiApp
-## Installation
 
 ### Install dependencies:
 
