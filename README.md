@@ -29,9 +29,9 @@ This project is a React Native-based Product Listing Application. The app intera
 
 ## Screens
 - **LoginScreen**: User login interface.
-- **RegistrationScreen**: User registration interface.
-- **ProductListingScreen**: Displays a list of products fetched from the API.
-- **ProductDetailsScreen**: Shows detailed information for a selected product.
+- **RegisterScreen**: User registration interface.
+- **ProductsScreen**: Displays a list of products fetched from the API.
+- **ProductScreen**: Shows detailed information for a selected product.
 
 ## Installation
 
