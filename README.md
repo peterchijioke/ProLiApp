@@ -87,11 +87,7 @@ User registration and login.
 Navigation through the Product Listing and Product Details screens.
 Adding a product to favorites and viewing the list of favorite products.
 
-### Resources
-React Native Documentation
-React Navigation Documentation
-DummyJSON Products API Documentation
-AsyncStorage Documentation
+
 
 
 
