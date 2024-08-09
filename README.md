@@ -39,3 +39,63 @@ This project is a React Native-based Product Listing Application. The app intera
    ```bash
    git clone https://github.com/peterchijioke/ProLiApp.git
    cd PrLiApp
+## Installation
+
+### Install dependencies:
+
+```bash
+npm install
+```
+
+or
+
+```bash
+yarn install
+```
+### Start the Metro Bundler
+
+```bash
+npx react-native start
+```
+
+### On Android
+```bash
+npx react-native run-android
+```
+### On iOS
+```bash
+npx react-native run-ios
+```
+## Usage
+
+1. **Register a new user** using the Registration screen.
+2. **Log in** with the registered credentials.
+3. After logging in, you'll be redirected to the **Product Listing Screen** where you can browse the available products.
+4. Click on a product to view its details on the **Product Details Screen**.
+5. **Add a product to your favorites** using the "Add to Favorites" button.
+6. **Logout** using the logout button, which will clear your session data and redirect you back to the **Login screen**.
+
+## API Integration
+The application integrates with the DummyJSON API to fetch and display product data. Error handling is implemented to manage network issues and other potential errors.
+
+## Screenshots
+Provide screenshots of the following screens:
+
+## Demonstration
+A short video demonstrating the following:
+
+User registration and login.
+Navigation through the Product Listing and Product Details screens.
+Adding a product to favorites and viewing the list of favorite products.
+
+### Resources
+React Native Documentation
+React Navigation Documentation
+DummyJSON Products API Documentation
+AsyncStorage Documentation
+
+
+
+
+
+
