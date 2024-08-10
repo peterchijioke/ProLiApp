@@ -5,12 +5,16 @@ type Props = {};
 
 export const LoginScreenName = 'LoginScreen';
 const LoginScreen = () => {
-  return (
-    <View>
-      <Text>LoginScreen</Text>
-    </View>
-  );
+  return <AuthWrapper></AuthWrapper>;
 };
+
+const AuthWrapper = () => (
+  <View
+    style={{
+      flex: 1,
+      backgroundColor,
+    }}></View>
+);
 
 export default LoginScreen;
 

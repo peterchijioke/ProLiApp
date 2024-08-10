@@ -64,7 +64,6 @@ yarn-error.log
 
 # testing
 /coverage
-secrets
 # Yarn
 .yarn/*
 !.yarn/patches
@@ -72,3 +71,6 @@ secrets
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# Secret file
+secrets

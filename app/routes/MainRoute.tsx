@@ -9,8 +9,13 @@ function MainRoute() {
   const Stack = createNativeStackNavigator();
   return (
     <Stack.Navigator>
-      <Stack.Screen name={LoginScreenName} component={LoginScreen} />
-      <Stack.Screen name={RegisterScreenName} component={RegisterScreen} />
+      <Stack.Group
+        screenOptions={{
+          headerShown: false,
+        }}>
+        <Stack.Screen name={LoginScreenName} component={LoginScreen} />
+        <Stack.Screen name={RegisterScreenName} component={RegisterScreen} />
+      </Stack.Group>
       <Stack.Screen name={ProductsScreenName} component={ProductsScreen} />
       <Stack.Screen name={ProductScreenName} component={ProductScreen} />
     </Stack.Navigator>
