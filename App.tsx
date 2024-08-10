@@ -1,11 +1,15 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import MainRoute from './app/routes/MainRoute';
+import MainRoute from './src/routes/MainRoute';
+import Toast from 'react-native-toast-message';
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <MainRoute />
-    </NavigationContainer>
+    <React.Fragment>
+      <NavigationContainer>
+        <MainRoute />
+      </NavigationContainer>
+      <Toast />
+    </React.Fragment>
   );
 }

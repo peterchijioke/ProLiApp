@@ -13,8 +13,9 @@ function MainRoute() {
         screenOptions={{
           headerShown: false,
         }}>
-        <Stack.Screen name={LoginScreenName} component={LoginScreen} />
         <Stack.Screen name={RegisterScreenName} component={RegisterScreen} />
+
+        <Stack.Screen name={LoginScreenName} component={LoginScreen} />
       </Stack.Group>
       <Stack.Screen name={ProductsScreenName} component={ProductsScreen} />
       <Stack.Screen name={ProductScreenName} component={ProductScreen} />
