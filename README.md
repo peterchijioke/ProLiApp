@@ -79,6 +79,7 @@ The application integrates with the DummyJSON API to fetch and display product d
 
 ## Screenshots
 Provide screenshots of the following screens:
+
 ![Alt text](./Login.jpeg)
 ![Alt text](./Register.jpeg)
 ![Alt text](./Product.jpeg)
