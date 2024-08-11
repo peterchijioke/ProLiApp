@@ -78,7 +78,6 @@ npx react-native run-ios
 The application integrates with the DummyJSON API to fetch and display product data. Error handling is implemented to manage network issues and other potential errors.
 
 ## Screenshots
-Provide screenshots of the following screens:
 
 ![Alt text](./Login.jpeg)
 ![Alt text](./Register.jpeg)
