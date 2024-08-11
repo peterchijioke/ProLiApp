@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import {View, Button} from 'react-native';
 import AppNormalInput from '../common/AppNormalInput';
@@ -12,6 +12,8 @@ import {ProductsScreenName} from '../../screens/ProductsScreen';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {decryptPassword} from '../../utils';
+import {AppText} from '../common/AppText';
+import {RegisterScreenName} from '../../screens/RegisterScreen';
 
 function LoginForm() {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
@@ -19,23 +21,26 @@ function LoginForm() {
   const {
     control,
     handleSubmit,
+    setValue,
     formState: {errors},
   } = useForm<LoginFormInputs>({
     resolver: zodResolver(loginSchema),
   });
 
   const onSubmit = async (data: LoginFormInputs) => {
+    setIsLoading(true);
     try {
       const user = await AsyncStorage.getItem('@user');
       if (user) {
         const userObject = JSON.parse(user);
-        const decryptedPassword = decryptPassword(
-          userObject?.password as string,
-        );
+        const decryptedPassword = userObject?.password;
+        // decryptPassword(userObject?.password);
         if (
           userObject?.email === data?.email &&
           decryptedPassword !== data.password
         ) {
+          setIsLoading(false);
+
           AppToast(`Either email or password is incorrect...`, ToastEnum.error);
           return;
         }
@@ -43,6 +48,7 @@ function LoginForm() {
           userObject?.email !== data?.email &&
           decryptedPassword === data.password
         ) {
+          setIsLoading(false);
           AppToast(`Either email or password is incorrect...`, ToastEnum.error);
           return;
         }
@@ -51,24 +57,41 @@ function LoginForm() {
           userObject?.email === data?.email &&
           decryptedPassword === data.password
         ) {
-          setTimeout(() => {
+          await AsyncStorage.setItem('@login', 'true');
+          setTimeout(async () => {
             setIsLoading(false);
+            AppToast(`Login successful...`, ToastEnum.success);
             navigation.replace(ProductsScreenName);
-          }, 10000);
-          return;
-        } else {
-          AppToast(
-            `User does not exist please register to continue...`,
-            ToastEnum.info,
-          );
+          }, 7000);
           return;
         }
+      } else {
+        setIsLoading(false);
+        AppToast(
+          `User does not exist please register to continue...`,
+          ToastEnum.info,
+        );
+        return;
       }
     } catch (error: any) {
       setIsLoading(false);
       AppToast(error?.message as string, ToastEnum.error);
     }
   };
+  useEffect(() => {
+    (async () => {
+      try {
+        const user = await AsyncStorage.getItem('@user');
+        if (user) {
+          let obj = JSON.parse(user);
+          setValue('email', obj?.email ?? '');
+          setValue('password', '');
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
 
   return (
     <View style={{padding: 18, height: '100%', width: '100%', gap: 35}}>
@@ -104,6 +127,18 @@ function LoginForm() {
             />
           )}
         />
+        <AppText>
+          Don't have an account?{' '}
+          <AppText
+            onPress={() => {
+              navigation.navigate(RegisterScreenName as never);
+            }}
+            style={{
+              textDecorationLine: 'underline',
+            }}>
+            {'Register'}
+          </AppText>
+        </AppText>
       </View>
       <View
         style={{

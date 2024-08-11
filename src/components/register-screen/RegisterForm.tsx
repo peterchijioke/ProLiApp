@@ -1,25 +1,24 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import {View} from 'react-native';
 import AppNormalInput from '../common/AppNormalInput';
 import AppPasswordInput from '../common/AppPasswordInput';
 import {zodResolver} from '@hookform/resolvers/zod';
-import {LoginFormInputs} from '../../zod/login-schema';
 import AppButton from '../common/AppButton';
 import {RegisterFormInputs, registerSchema} from '../../zod/register-schema';
-import {MoveRight} from 'lucide-react-native';
-import Toast from 'react-native-toast-message';
 import AppToast, {ToastEnum} from '../../utils/AppToast';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation} from '@react-navigation/native';
 import {LoginScreenName} from '../../screens/LoginScreen';
 import {encryptPassword} from '../../utils';
+import {AppText} from '../common/AppText';
 
 function RegisterForm() {
   const navigation = useNavigation();
   const [isLoading, setIsLoading] = useState(false);
   const {
     control,
+    setValue,
     handleSubmit,
     formState: {errors},
   } = useForm<RegisterFormInputs>({
@@ -27,6 +26,11 @@ function RegisterForm() {
   });
 
   const onSubmit = async (data: RegisterFormInputs) => {
+    const encPass = data.password;
+
+    // encryptPassword(data?.password);
+    console.log(encPass, '=enc pass');
+
     setIsLoading(true);
     try {
       const user = await AsyncStorage.getItem('@user');
@@ -44,21 +48,27 @@ function RegisterForm() {
             '@user',
             JSON.stringify({
               ...data,
-              password: encryptPassword(data?.password),
+              password: encPass,
             }),
           );
           setTimeout(() => {
             setIsLoading(false);
             navigation.navigate(LoginScreenName as never);
-          }, 10000);
+          }, 7000);
         }
       } else {
-        await AsyncStorage.setItem('@user', JSON.stringify(data));
+        await AsyncStorage.setItem(
+          '@user',
+          JSON.stringify({
+            ...data,
+            password: encPass,
+          }),
+        );
         AppToast('Registration successful...', ToastEnum.success);
         setTimeout(() => {
           setIsLoading(false);
           navigation.navigate(LoginScreenName as never);
-        }, 10000);
+        }, 7000);
       }
     } catch (error: any) {
       setIsLoading(false);
@@ -78,7 +88,6 @@ function RegisterForm() {
           render={({field: {onChange, onBlur, value}}) => (
             <AppNormalInput
               error={errors.fullName}
-              keyboardType="email-address"
               label="Full Name"
               placeholder="Full Name"
               onBlur={onBlur}
@@ -116,7 +125,20 @@ function RegisterForm() {
             />
           )}
         />
+        <AppText>
+          Already have an account?{' '}
+          <AppText
+            onPress={() => {
+              navigation.navigate(LoginScreenName as never);
+            }}
+            style={{
+              textDecorationLine: 'underline',
+            }}>
+            {'Login'}
+          </AppText>
+        </AppText>
       </View>
+
       <View
         style={{
           marginTop: '10%',

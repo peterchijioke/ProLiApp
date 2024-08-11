@@ -4,7 +4,7 @@ import { APIResponse } from "../types/api-response"
 
 export const getApiService = async(path:string):Promise<APIResponse>=>{
   try {
-    const response = await axios.get(secrets().base_url+path)
+    const response = await axios.get(`${secrets().base_url}${path}`)
     return {error:false,data:response.data}
   } catch (error:any) {
    return {

@@ -7,7 +7,19 @@ return cipherPassword
 }
 
 export const decryptPassword=(hashed:string):string=>{
-  const bytes  = CryptoJS.AES.decrypt(hashed, 'secret key 123');
+  const bytes  = CryptoJS.AES.decrypt(hashed, secrets().passwordSecret);
   const password = bytes.toString(CryptoJS.enc.Utf8);
+  console.log(hashed,"hash")
+  console.log(password)
 return password
+}
+
+export function trimText(text: string, length: number): string {
+    let trimmedText = text?.trim();
+    if (trimmedText?.length > length) {
+        trimmedText = trimmedText?.slice(0, length);
+        trimmedText = trimmedText?.replace(/\.\.\.$/, ''); 
+        trimmedText += '...'; 
+    }
+    return trimmedText;
 }
