@@ -93,9 +93,3 @@ Navigation through the Product Listing and Product Details screens.
 Adding a product to favorites and viewing the list of favorite products.
 
 
-
-
-
-
-
-
