@@ -13,19 +13,15 @@ const Products = () => {
   const {loginUser} = useThemeStore();
   const {data, isLoading, error} = useSWR(path, getApiService);
   const favorites = loginUser?.favorites ?? [];
-
   useEffect(() => {
     if (error || data?.error) {
       AppToast((data?.message as string) || error.message, ToastEnum.error);
     }
   }, [error, data]);
-
   const filteredData = data?.data?.products?.filter((item: any) =>
     favorites.includes(item.id),
   );
-
   const _renderItem = ({item}: any) => <ProductCard product={item} />;
-
   return (
     <KeyboardAwareFlatList
       showsVerticalScrollIndicator={false}
