@@ -4,9 +4,7 @@ import {AppText} from '../common/AppText';
 import useThemeStore from '../../data/theme-provider';
 import QuantityIncrementor from './QuantityIncrementor';
 
-type Props = {};
-
-const ButtonSection = (props: Props) => {
+const ButtonSection = () => {
   const {appTheme} = useThemeStore();
   return (
     <View

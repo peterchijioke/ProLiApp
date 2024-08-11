@@ -1,4 +1,4 @@
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import React, {useState} from 'react';
 import useThemeStore from '../../data/theme-provider';
 import {AppText} from '../common/AppText';
@@ -10,18 +10,7 @@ const QuantityIncrementor = (props: Props) => {
   const {appTheme} = useThemeStore();
   const [count, setCount] = useState<number>(0);
   return (
-    <View
-      style={{
-        flexGrow: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        overflow: 'hidden',
-        flexDirection: 'row',
-        height: 48,
-        borderColor: appTheme.border,
-        borderWidth: 1,
-        borderRadius: 5,
-      }}>
+    <View style={{...styles.container, borderColor: appTheme.border}}>
       <TouchableOpacity
         disabled={count === 0}
         onPress={() => {
@@ -56,5 +45,18 @@ const QuantityIncrementor = (props: Props) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flexGrow: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+    flexDirection: 'row',
+    height: 48,
+    borderWidth: 1,
+    borderRadius: 5,
+  },
+});
 
 export default QuantityIncrementor;

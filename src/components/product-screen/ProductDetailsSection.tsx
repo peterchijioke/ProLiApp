@@ -11,7 +11,6 @@ type Props = {
 
 const ProductDetailsSection = ({product, ...props}: Props) => {
   const {appTheme} = useThemeStore();
-  console.log(product);
   return (
     <View
       style={{
