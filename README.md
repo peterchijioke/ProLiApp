@@ -77,8 +77,16 @@ npx react-native run-ios
 ## API Integration
 The application integrates with the DummyJSON API to fetch and display product data. Error handling is implemented to manage network issues and other potential errors.
 
+## APK
+https://drive.google.com/file/d/1m1t5kotGAAnjp66QaUvZAs9Mvdxy1q6j/view?usp=sharing
+
 ## Screenshots
-Provide screenshots of the following screens:
+
+![Alt text](./Login.jpeg)
+![Alt text](./Register.jpeg)
+![Alt text](./Product.jpeg)
+![Alt text](./Products.jpeg)
+![Alt text](./Fav.jpeg)
 
 ## Demonstration
 A short video demonstrating the following:
@@ -86,11 +94,5 @@ A short video demonstrating the following:
 User registration and login.
 Navigation through the Product Listing and Product Details screens.
 Adding a product to favorites and viewing the list of favorite products.
-
-
-
-
-
-
 
 
