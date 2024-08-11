@@ -17,7 +17,7 @@ import {RegisterScreenName} from '../../screens/RegisterScreen';
 import useThemeStore from '../../data/theme-provider';
 
 function LoginForm() {
-  const {setIsUserLogin} = useThemeStore();
+  const {setAuthUser} = useThemeStore();
   const navigation = useNavigation();
   const [isLoading, setIsLoading] = useState(false);
   const {
@@ -60,11 +60,11 @@ function LoginForm() {
           decryptedPassword === data.password
         ) {
           setTimeout(async () => {
-            setIsUserLogin();
+            setAuthUser(userObject);
             setIsLoading(false);
             AppToast(`Login successful...`, ToastEnum.success);
             navigation.navigate(ProductsScreenName as never);
-          }, 7000);
+          }, 5000);
           return;
         }
       } else {

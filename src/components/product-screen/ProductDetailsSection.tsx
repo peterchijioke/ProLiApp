@@ -1,9 +1,11 @@
-import {View, Text} from 'react-native';
-import React from 'react';
+import {View, Text, TouchableOpacity} from 'react-native';
+import React, {useEffect} from 'react';
 import {AppText} from '../common/AppText';
 import {Product} from '../../types/product';
 import useThemeStore from '../../data/theme-provider';
-import {Star} from 'lucide-react-native';
+import {Heart, Star} from 'lucide-react-native';
+import AppToast, {ToastEnum} from '../../utils/AppToast';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type Props = {
   product: Product;
@@ -11,6 +13,59 @@ type Props = {
 
 const ProductDetailsSection = ({product, ...props}: Props) => {
   const {appTheme} = useThemeStore();
+  const {setAuthUser, loginUser} = useThemeStore();
+  const handleAddFav = async () => {
+    try {
+      await AsyncStorage.setItem(
+        '@user',
+        JSON.stringify({
+          ...loginUser,
+          favorites: loginUser?.favorites
+            ? [...loginUser?.favorites, product?.id]
+            : [product?.id],
+        }),
+      );
+      setAuthUser({
+        ...loginUser,
+        favorites: loginUser?.favorites
+          ? [...loginUser?.favorites, product?.id]
+          : [product?.id],
+      });
+      AppToast(
+        'Product added to your favorites list successfully',
+        ToastEnum.success,
+      );
+    } catch (error: any) {
+      AppToast(error.message, ToastEnum.error);
+    }
+  };
+  const removeFav = async () => {
+    try {
+      const updatedFavorites = loginUser?.favorites?.filter(
+        (favId: number) => favId !== product?.id,
+      );
+
+      await AsyncStorage.setItem(
+        '@user',
+        JSON.stringify({
+          ...loginUser,
+          favorites: updatedFavorites,
+        }),
+      );
+
+      setAuthUser({
+        ...loginUser,
+        favorites: updatedFavorites,
+      });
+
+      AppToast(
+        'Product removed from your favorites list successfully',
+        ToastEnum.success,
+      );
+    } catch (error: any) {
+      AppToast(error.message, ToastEnum.error);
+    }
+  };
   return (
     <View
       style={{
@@ -71,14 +126,37 @@ const ProductDetailsSection = ({product, ...props}: Props) => {
           {product?.stock}
         </AppText>
       </View>
-      <AppText
-        styles={{
-          fontSize: 24,
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
           marginTop: '5%',
-          fontFamily: 'Poppins-Bold',
+          justifyContent: 'space-between',
         }}>
-        ₦ {product?.price}
-      </AppText>
+        <AppText
+          styles={{
+            fontSize: 24,
+            fontFamily: 'Poppins-Bold',
+          }}>
+          ₦ {product?.price}
+        </AppText>
+
+        <TouchableOpacity
+          onPress={
+            loginUser?.favorites && loginUser?.favorites.includes(product?.id)
+              ? removeFav
+              : handleAddFav
+          }>
+          <Heart
+            size={30}
+            color={
+              loginUser?.favorites && loginUser?.favorites.includes(product?.id)
+                ? 'red'
+                : appTheme?.button
+            }
+          />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

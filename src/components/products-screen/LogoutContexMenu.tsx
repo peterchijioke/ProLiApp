@@ -14,16 +14,17 @@ import AppToast, {ToastEnum} from '../../utils/AppToast';
 import {useNavigation} from '@react-navigation/native';
 import {LoginScreenName} from '../../screens/LoginScreen';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {FavoriteProductsScreenName} from '../../screens/FavouriteProductsScreen';
 
 type Props = {};
 
 const LogoutContexMenu = (props: Props) => {
-  const {appTheme, setIsUserLogin} = useThemeStore();
+  const {appTheme, setAuthUser} = useThemeStore();
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
 
   const handleLogout = async () => {
     try {
-      setIsUserLogin();
+      setAuthUser(null);
     } catch (error: any) {
       AppToast(error?.message as string, ToastEnum.error);
     }
@@ -61,6 +62,9 @@ const LogoutContexMenu = (props: Props) => {
           </AppText>
         </MenuOption>
         <MenuOption
+          onSelect={() => {
+            navigation.navigate(FavoriteProductsScreenName);
+          }}
           style={{
             height: 40,
             // alignItems: 'center',
@@ -71,7 +75,7 @@ const LogoutContexMenu = (props: Props) => {
               color: appTheme.button,
               fontFamily: 'Poppins-SemiBold',
             }}>
-            Profile
+            Favorite Product
           </AppText>
         </MenuOption>
       </MenuOptions>

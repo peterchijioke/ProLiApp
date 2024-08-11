@@ -14,7 +14,7 @@ export default function App() {
   React.useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 7000);
+    }, 5000);
   }, [loading]);
 
   if (loading) {

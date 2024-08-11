@@ -6,10 +6,13 @@ import RegisterScreen, {RegisterScreenName} from '../screens/RegisterScreen';
 import ProductScreen, {ProductScreenName} from '../screens/ProductScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import useThemeStore from '../data/theme-provider';
+import FavoriteProductsScreen, {
+  FavoriteProductsScreenName,
+} from '../screens/FavouriteProductsScreen';
 const Stack = createNativeStackNavigator();
 
 function MainRoute() {
-  const {isUserLogin: state} = useThemeStore();
+  const {loginUser: state} = useThemeStore();
   return (
     <Stack.Navigator>
       {!state ? (
@@ -34,6 +37,10 @@ function MainRoute() {
             <Stack.Screen
               name={ProductsScreenName}
               component={ProductsScreen}
+            />
+            <Stack.Screen
+              name={FavoriteProductsScreenName}
+              component={FavoriteProductsScreen}
             />
             <Stack.Screen name={ProductScreenName} component={ProductScreen} />
           </Stack.Group>
