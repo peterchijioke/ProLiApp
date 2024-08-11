@@ -22,6 +22,7 @@ const AppNormalInput: FC<Props> = ({...props}): JSX.Element => {
           borderColor: appTheme.border,
           borderWidth: 2,
           borderRadius: 10,
+          color: appTheme.text,
           fontFamily: 'Poppins-Regular',
           paddingLeft: 10,
           paddingRight: 5,

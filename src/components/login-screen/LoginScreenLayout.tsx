@@ -17,7 +17,7 @@ const LoginScreenLayout = () => {
           entering={FadeInDown}
           style={{
             ...styles.container,
-            backgroundColor: appTheme.primary,
+            backgroundColor: appTheme.card,
           }}>
           <View style={styles.welcomeWrapper}>
             <AppText style={styles.welcome}>Welcome Back</AppText>

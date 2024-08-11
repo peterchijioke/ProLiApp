@@ -15,79 +15,77 @@ import {Heart, ShoppingCart} from 'lucide-react-native';
 import {useNavigation} from '@react-navigation/native';
 import useProductsStore from '../../data/products-provider';
 import {ProductScreenName} from '../../screens/ProductScreen';
-import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
+
 const ProductCard = ({product}: {product: any}) => {
   const {setProduct} = useProductsStore();
   const navigation = useNavigation();
   const {appTheme} = useThemeStore();
   return (
-    <SkeletonPlaceholder>
-      <Pressable
-        onPress={() => {
-          setProduct(product);
-          navigation.navigate(ProductScreenName as never);
-        }}
+    <Pressable
+      onPress={() => {
+        setProduct(product);
+        navigation.navigate(ProductScreenName as never);
+      }}
+      style={{
+        backgroundColor: appTheme.card,
+        ...styles.container,
+      }}>
+      <Image
+        source={
+          product?.thumbnail
+            ? {
+                uri: product.thumbnail,
+              }
+            : require('../../assets/images/bg.jpg')
+        }
+        style={{height: 100, width: 100, borderRadius: 10}}
+      />
+      <View
         style={{
-          backgroundColor: appTheme.card,
-          ...styles.container,
+          flexDirection: 'column',
+          height: '100%',
+          justifyContent: 'center',
+          flexGrow: 1,
         }}>
-        <Image
-          source={
-            product?.thumbnail
-              ? {
-                  uri: product.thumbnail,
-                }
-              : require('../../assets/images/bg.jpg')
-          }
-          style={{height: 100, width: 100, borderRadius: 10}}
-        />
-        <View
-          style={{
-            flexDirection: 'column',
-            height: '100%',
-            justifyContent: 'center',
-            flexGrow: 1,
+        <AppText
+          styles={{
+            fontSize: 20,
+            color: appTheme.button,
+            fontFamily: 'Poppins-Bold',
+          }}>
+          ₦{product?.price}
+        </AppText>
+        <AppText
+          styles={{
+            fontFamily: 'Poppins-SemiBold',
+            maxWidth: 120,
+          }}>
+          {trimText(product?.title, 'Essence Mascara gvgcvgnvdv'.length)}
+        </AppText>
+        <AppText
+          styles={{
+            fontFamily: 'Poppins-Regular',
           }}>
           <AppText
-            style={{
-              fontSize: 20,
-              color: appTheme.button,
-              fontFamily: 'Poppins-Bold',
-            }}>
-            ₦{product?.price}
-          </AppText>
-          <AppText
-            style={{
+            styles={{
               fontFamily: 'Poppins-SemiBold',
-              maxWidth: 120,
             }}>
-            {trimText(product?.title, 'Essence Mascara gvgcvgnvdv'.length)}
-          </AppText>
-          <AppText
-            style={{
-              fontFamily: 'Poppins-Regular',
-            }}>
-            <AppText
-              style={{
-                fontFamily: 'Poppins-SemiBold',
-              }}>
-              In stock:
-            </AppText>{' '}
-            {product?.stock}
-          </AppText>
-        </View>
-        <View style={{...styles?.action}}>
-          <TouchableOpacity
-            style={{...styles.actionBtn, backgroundColor: appTheme.button}}>
-            <Heart size={25} color={appTheme.notification} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{...styles.actionBtn, backgroundColor: appTheme.button}}>
-            <ShoppingCart size={25} color={appTheme.notification} />
-          </TouchableOpacity>
-        </View>
-      </Pressable>
-    </SkeletonPlaceholder>
+            In stock:
+          </AppText>{' '}
+          {product?.stock}
+        </AppText>
+      </View>
+      <View style={{...styles?.action}}>
+        <TouchableOpacity
+          style={{...styles.actionBtn, backgroundColor: appTheme.button}}>
+          <Heart size={25} color={appTheme.notification} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{...styles.actionBtn, backgroundColor: appTheme.button}}>
+          <ShoppingCart size={25} color={appTheme.notification} />
+        </TouchableOpacity>
+      </View>
+    </Pressable>
   );
 };
 

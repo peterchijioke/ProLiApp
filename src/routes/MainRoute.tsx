@@ -5,18 +5,11 @@ import LoginScreen, {LoginScreenName} from '../screens/LoginScreen';
 import RegisterScreen, {RegisterScreenName} from '../screens/RegisterScreen';
 import ProductScreen, {ProductScreenName} from '../screens/ProductScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import useThemeStore from '../data/theme-provider';
+const Stack = createNativeStackNavigator();
 
 function MainRoute() {
-  const Stack = createNativeStackNavigator();
-  const [state, setState] = useState<boolean>();
-  useEffect(() => {
-    (async () => {
-      let f = await AsyncStorage.getItem('@login');
-      if (f) {
-        setState(true);
-      }
-    })();
-  }, []);
+  const {isUserLogin: state} = useThemeStore();
   return (
     <Stack.Navigator>
       {!state ? (

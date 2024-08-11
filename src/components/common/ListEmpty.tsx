@@ -13,7 +13,7 @@ const ListEmpty = () => {
         justifyContent: 'center',
       }}>
       <AppText
-        style={{
+        styles={{
           fontSize: 18,
           fontFamily: 'Poppins-SemiBold',
         }}>

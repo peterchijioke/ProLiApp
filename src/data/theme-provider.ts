@@ -1,5 +1,6 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { createJSONStorage, persist } from 'zustand/middleware';
 
 type ITheme={
    primary: string;
@@ -13,26 +14,36 @@ type ITheme={
 }
 interface ThemeProps {
   appTheme: ITheme;
+  isUserLogin:boolean;
+  state:boolean;
+  setState:()=>void
+  setIsUserLogin:()=>void
   setAppTheme: (appTheme:ITheme) => void;
 }
 
 const useThemeStore = create<ThemeProps>()(
   persist(
     (set) => ({
+      state:true,
+      isUserLogin:false,
       appTheme: {
-        primary: "#1E1E1E",
-        secondary: "#121212",
-        background: "#000000",
-        card: "#2A2A2A",
-        text: "#FFFFFF",
-        button: "#BB86FC",
-        border: "#3E3E3E",
-        notification: "#FF5722"
+          primary: "#238585",
+          secondary: "#EEEEEE",
+          background: "#FFFFFF",
+          card: "#FAFAFA",
+          text: "#000000",
+          button: "#238585",
+          border: "#DDDDDD",
+          notification: "#FF9800",
       },
       setAppTheme: (appTheme) => set(() => ({ appTheme })),
+      setState: () => set((state) => ({ state:!state.state })),
+      setIsUserLogin: () => set((state) => ({ isUserLogin:!state.isUserLogin })),
+
     }),
     {
       name: 'theme-storage', 
+     storage: createJSONStorage(() => AsyncStorage)
     }
   )
 );

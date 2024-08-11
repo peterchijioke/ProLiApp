@@ -14,9 +14,11 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {decryptPassword} from '../../utils';
 import {AppText} from '../common/AppText';
 import {RegisterScreenName} from '../../screens/RegisterScreen';
+import useThemeStore from '../../data/theme-provider';
 
 function LoginForm() {
-  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+  const {setIsUserLogin} = useThemeStore();
+  const navigation = useNavigation();
   const [isLoading, setIsLoading] = useState(false);
   const {
     control,
@@ -57,11 +59,11 @@ function LoginForm() {
           userObject?.email === data?.email &&
           decryptedPassword === data.password
         ) {
-          await AsyncStorage.setItem('@login', 'true');
           setTimeout(async () => {
+            setIsUserLogin();
             setIsLoading(false);
             AppToast(`Login successful...`, ToastEnum.success);
-            navigation.replace(ProductsScreenName);
+            navigation.navigate(ProductsScreenName as never);
           }, 7000);
           return;
         }

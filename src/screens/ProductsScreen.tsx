@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useLayoutEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import ProductScreenHeader from '../components/products-screen/ProductScreenHeader';
+import ProductsScreenHeader from '../components/products-screen/ProductsScreenHeader';
 import ProductsScreenLayout from '../components/products-screen/ProductsScreenLayout';
 export const ProductsScreenName = 'ProductsScreen';
 const ProductsScreen = () => {
@@ -10,7 +10,7 @@ const ProductsScreen = () => {
     navigation.setOptions({
       headerShown: true,
       title: '',
-      header: () => <ProductScreenHeader />,
+      header: () => <ProductsScreenHeader />,
     });
   }, [navigation]);
   return <ProductsScreenLayout />;

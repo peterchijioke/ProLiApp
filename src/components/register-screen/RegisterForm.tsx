@@ -52,6 +52,7 @@ function RegisterForm() {
             }),
           );
           setTimeout(() => {
+            AppToast('Registration successful...', ToastEnum.success);
             setIsLoading(false);
             navigation.navigate(LoginScreenName as never);
           }, 7000);
@@ -64,8 +65,9 @@ function RegisterForm() {
             password: encPass,
           }),
         );
-        AppToast('Registration successful...', ToastEnum.success);
         setTimeout(() => {
+          AppToast('Registration successful...', ToastEnum.success);
+
           setIsLoading(false);
           navigation.navigate(LoginScreenName as never);
         }, 7000);

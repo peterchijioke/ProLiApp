@@ -8,10 +8,11 @@ export const AppText: FC<Props> = ({...props}) => {
   const {appTheme} = useThemeStore();
   return (
     <Text
-      style={[
-        {color: appTheme.text, fontFamily: 'Poppins-Regular'},
-        props.style,
-      ]}
+      style={{
+        color: appTheme.text,
+        fontFamily: 'Poppins-Regular',
+        ...props.styles,
+      }}
       {...props}
     />
   );

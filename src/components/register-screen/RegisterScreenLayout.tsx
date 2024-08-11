@@ -17,7 +17,7 @@ const RegisterScreenLayout = () => {
           entering={FadeInDown}
           style={{
             ...styles.container,
-            backgroundColor: appTheme.primary,
+            backgroundColor: appTheme.card,
           }}>
           <View style={styles.welcomeWrapper}>
             <AppText style={styles.welcome}>Register</AppText>

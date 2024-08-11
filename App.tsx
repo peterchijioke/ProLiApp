@@ -5,6 +5,7 @@ import Toast from 'react-native-toast-message';
 import {View} from 'react-native';
 import {AppText} from './src/components/common/AppText';
 import useThemeStore from './src/data/theme-provider';
+import {MenuProvider} from 'react-native-popup-menu';
 
 export default function App() {
   const [loading, setLoading] = React.useState(true);
@@ -38,9 +39,11 @@ export default function App() {
   }
   return (
     <React.Fragment>
-      <NavigationContainer>
-        <MainRoute />
-      </NavigationContainer>
+      <MenuProvider>
+        <NavigationContainer>
+          <MainRoute />
+        </NavigationContainer>
+      </MenuProvider>
       <Toast />
     </React.Fragment>
   );
