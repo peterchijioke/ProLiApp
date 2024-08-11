@@ -20,7 +20,7 @@ const RegisterScreenLayout = () => {
             backgroundColor: appTheme.card,
           }}>
           <View style={styles.welcomeWrapper}>
-            <AppText style={styles.welcome}>Register</AppText>
+            <AppText styles={styles.welcome}>Register</AppText>
           </View>
           <KeyboardAwareScrollView
             showsVerticalScrollIndicator={false}

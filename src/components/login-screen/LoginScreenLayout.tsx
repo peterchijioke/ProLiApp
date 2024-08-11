@@ -20,7 +20,7 @@ const LoginScreenLayout = () => {
             backgroundColor: appTheme.card,
           }}>
           <View style={styles.welcomeWrapper}>
-            <AppText style={styles.welcome}>Welcome Back</AppText>
+            <AppText styles={styles.welcome}>Welcome Back</AppText>
           </View>
           <KeyboardAwareScrollView
             showsVerticalScrollIndicator={false}
